@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
+
+    defaultConfig {
+        applicationId "com.msgcopy.kaoke.a10668"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    signingConfigs {
+
+        release {
+            storeFile file("msgcopy.keystore")
+            storePassword "6843190527"
+            keyAlias "msgcopy.keystore"
+            keyPassword "6843190527"
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+        }
+
+        release {
+            // 是否进行混淆
+            minifyEnabled false
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:support-v4:22.2.0'
+    compile files('libs/libammsdk.jar')
+    compile 'com.loopj.android:android-async-http:1.4.6'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+}
